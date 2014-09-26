@@ -1,0 +1,461 @@
+Changelog (http://teleal.org/projects/cling/)
+==============================================================================
+
+1.0.5 (2011-09-22)
+
+- Bug: Temporary fix MediaRenderer binding, can't map Java short to UPnP i2
+
+------------------------------------------------------------------------------
+
+1.0.4 (2011-09-21)
+
+- Bug: Fixed case-sensitive name check for invalid and skipped VMWare/Parallels
+       network interfaces
+
+- Bug: Skip VMWare interfaces on Windows
+
+- Bug: Skip network interface if no usable addresses have been discovered
+
+- Bug: Fixed NPE in PersonWithRole, but role attribute is not optional
+
+- Log a warning when an invalid URI is used for HTTP requests
+
+------------------------------------------------------------------------------
+
+1.0.3 (2011-07-08)
+
+- Feature: Default configuration uses Executors.newCachedThreadPool instead
+           of manual thread management
+
+- Feature: During service binding, detect state variables with the same name
+           as an action input/output argument automatically
+
+- Feature: Introduced compatibility checking in statevar/argument type validation
+
+- Bug: Fixed "from string" parsing but bug in ServiceReference
+
+- Bug: Use write lock not read lock when switchable network router is
+       shutting down
+
+- Bug: Accept valid XML boolean datatype literals 0/1 in DIDL parser
+
+- Bug: Start network router immediately when Android service is created, don't
+       wait for WiFi enabled event
+
+- Bug: Short primitive Java type shouldn't map to boolean or integer
+
+- Bug: Fixed StateVariable A_ARG_TYPE_Result type in MSFT registrar service
+
+- Bug: Fixed "int" UPnP datatype max-delta GENA moderation,
+
+- Bug: When receiving SEARCH messages, check for negative MX values
+
+- Bug: When receiving SEARCH messages, don't throw NPE if missing NTS header
+
+- Bug: Fix potential NPE with Roku Soundbridge discovery
+
+- Bug: Temporary fix for network router startup race condition/NPE in
+       receiving search messages before router is ready
+
+- Bug: Make UDN.uniqueSystemIdentifier() work on Android without
+       relying on unimplemented NetworkInterface.isLoopback()
+
+- Ignore Parallels network interfaces by default (like VMWare, they are not
+  properly cleaned up when emulator is not running, blocking Cling)
+
+- Relaxed validation of icon metadata during device discovery, accept
+  missing/invalid width, height, depth
+
+- Don't throw a RuntimeException when an invalid multicast datagram has been
+  received, log an INFO message only
+
+- Don't send search message on Android service startup, let the developer
+  decide when to send the (first) search message
+
+------------------------------------------------------------------------------
+
+1.0.2 (2011-04-28)
+
+- Feature: Support for DLNA attributes in DIDL content (Mario Franco)
+
+- Bug: Fixed spelling of *MetaData in LastChange schema and model, relaxed
+       LastChange and DIDL parsing rules
+
+- Bug: Ignore network interfaces without IP addresses
+
+- Bug: Log a warning in Workbench instead of NPE when a MediaRenderer has
+       no ConnectionManager
+
+- Bug: Don't throw NPE if Workbench is started with external logging config
+
+- More configuration options for Aapache HTTP Client, tweaked Android
+  HTTP Client defaults
+
+- Added simple main() getting started chapter to documentation
+
+------------------------------------------------------------------------------
+
+1.0.1 (2011-03-04)
+
+- Feature: Improved concurrency in Switchable/Android network router with
+           shared locking
+
+- Bug: Fixed NPE when network router can't be restarted after Android Wifi
+       returns
+
+- Bug: Fixed race condition between outbound GENA subscription procedure
+       and inbound initial event message (Michael Pujos)
+
+- Bug: Updated teleal-common to 1.0.12, fixed absolute URL handling bug
+
+- Relax validation of invalid state variable value range metadata
+
+- Trim trailing garbage from all invalid XML documents
+
+- Unified HTTP (client) operation timeouts and added recognizable exception
+  when router switching fails
+
+------------------------------------------------------------------------------
+
+1.0 (2011-31-01)
+
+- Feature: Ability to pause and resume registry maintenance on
+           multitasking-challenged machines
+
+- Feature: Registry maintenance interval now configurable, defaults to 1
+           second and 5 seconds on Android
+
+- Feature: Restart remote device expiration check cycle on registry
+           resume (Michael Pujos)
+
+- Feature: Switchable and configurable discovery
+
+- Feature: Action input argument aliasing for incompatible SOAP
+           messages (Mario Franco) and minor ActionArgument API cleanup
+
+- Feature: ContentDirectory browse action input argument alias for
+           XBox compatibility (Mario Franco)
+
+- Feature: Basic implementation of MediaRegistrarService for
+           XBox (Mario Franco)
+
+- Feature: Added DeviceDetailsProvider as a first step towards
+           device profiles (Mario Franco)
+
+- Feature: Added generic HTTP header regex matching provider for
+           device details (Mario Franco)
+
+- Feature: Added search support to AbstractContentDirectory (Ben Dodson)
+
+- Feature: Added DLNA flags constants for ProtocolInfo (Ben Dodson)
+
+- Feature: Added AbstractMap for Android < 2.3 compatibility of
+           LastChange parser (Ben Dodson)
+
+- Feature: Improved navigation of action argument table in workbench
+
+- Bug: Fixed potential NPE when service descriptor retrieval/parsing
+       of embedded device failed
+
+- Bug: Fixed potential NPE in RemoteDeviceIdentity#toString()
+
+- Bug: Generate event callback URLs just-in-time, don't use potentially
+      outdated (after network restart) URL stored in RemoteDeviceIdentity
+
+- Bug: Don't expire local event subscriptions on local service
+
+- Bug: Fixed incorrect handling of XML entities in all SAX-based parsers
+
+- Bug: Fixed discovery bug of mixed-case datatype names, e.g. dateTime
+
+- Bug: Fixed NPE when query state variable action was called but
+       not supported by local service
+
+- Bug: Fixed DIDL object class of MusicArtist
+
+- Bug: Fixed NPE in Workbench when checking supported protocols of
+       MediaRenderer
+
+- Bug: Unified timezone datatypes, switched from Date to Calendar default
+       mapping, fixed timezone-dependent tests
+
+- Bug: Fixed NPE when unknown HTTP method is received
+
+- Bug: Fixed valueOf(s) in DoubleDatatype and FloatDatatype
+
+- Bug: Fixed NPE in incoming GENA subscription processing when
+       preconditions failed
+
+- In datatypes, convert illegal negative signed strings to unsigned integer
+  value 0, don't throw exception
+
+- Refactored switchable network router, now in core transport package
+
+- Unified local URL (descriptor, callback) generation, now survives
+  network router restarts
+
+- Ignore childcount attribute of mediaserver content, it's usually wrong
+
+- Upgraded teleal-commons dependency
+
+- Optimizations for Android (Michael Pujos)
+
+- Improved compatibility, don't error when default value is not an allowed
+  value, log a warning and add it as an allowed value
+
+- Improved logging and exception handling when processing HTTP request
+  fails with Apache HTTPCore transport
+
+- ContentDirectory DIDL XML childCount attribute is optional, don't
+  include it if there is no value (Ben Dodson)
+
+- More robust URI parsing in device/service descriptors (don't crash on
+  garbage values sent by LaCie NAS)
+
+- Don't add prolog by default when generating DIDL XML content
+
+- Added CUSTOM enum value for handling invalid TransportState and
+  TransportStatus
+
+- More documentation for creating and binding services
+
+------------------------------------------------------------------------------
+
+1.0-beta8 (2010-12-06)
+
+- API change: Cleaned up all support module action callbacks, failure
+              message generation is up to the developer
+
+- API change: Unified model package for all AV services, added model
+              types for DIDL descriptor
+
+- Feature: Replaced JAXB-based parser with clean Android compatible
+           code for LastChange handling in support module AV services
+
+- Feature: Replaced JAXB-based parser with clean Android compatible
+           parser for DIDL content in support module AV services
+
+- Feature: Configuration option for discovery inclusion/exclusion with
+           UpnpServiceConfiguration#getExclusiveServiceTypes()
+
+- Bug: Don't start descriptor retrieval again after waiting for a
+       free thread for execution if meanwhile the descriptor was
+       already retrieved
+
+- Bug: Fixed ConcurrentModificationException on shutdown with active
+       GENA subscriptions
+
+- Bug: Handle invalid X_DLNADOC descriptor element value gracefully
+
+- Bug: Fail immediately on Android with wrong configuration, exit clean
+       on startup errors
+
+- Bug: Detect environment in which HTTPURLConnection is not usable
+       (e.g. Tomcat) and fail fast on startup
+
+- Bug: Fixed various NPEs, out-of-order discovery start listener notification
+
+- Bug: Detect network interfaces on Android emulator correctly
+
+- Bug: Clean exit on shutdown, close thread pools when UpnpService is stopped
+
+- Bug: Don't drop device BYEBYE if a device was removed immediately before
+       shutdown
+
+- Improvements to the XML printer, close XML elements inline if they have
+  only attributes, support printing of XML fragments
+
+- Documentation and tests for MediaServer and MediaRenderer
+
+- Added bridge module design documentation
+
+- Discovery performance optimization on Android, skipping expensive
+  string operations during validation
+
+------------------------------------------------------------------------------
+
+1.0-beta7 (2010-11-03)
+
+- API change: Additional shutdown methods on RegistryListener, other
+              minor changes
+
+- Feature: Preserve raw HTTP headers and make request message available
+           through ReceivingAction thread-local
+
+- Feature: Initial import of WAN bridge/HTTP gateway module with Workbench UI
+
+- Feature: Unified InternetGatewayDevice support
+
+- Feature: Bundled AndroidUpnpService component, handles WiFi on/off
+           gracefully, new documentation
+
+- Feature: ContentDirectory service skeleton and tests (Alessio Gaeta)
+
+- Feature: New peering ConnectionManager (Alessio Gaeta)
+
+- Feature: Added X_DLNADOC and DLNA caps in device descriptor
+
+- Bug: Accept non-compliant decimal service/device type versions
+
+- Bug: Exception handling didn't produce failure when local GENA
+       subscription can't be established
+
+- Bug: Fixed GENA incoming subscription removal on failed response delivery
+
+- Bug: Fixed action null input argument value handling for local invocation
+
+- Don't log errors on IOException in transport layer
+
+- Annotation binding, allowed-values declaration without enums
+
+- Rewrite of HTTP header handling and parsing
+
+- Updated dependency to teleal-common
+
+- Allow execution of local service action without UpnpService, easier testing
+
+- Enable 'mvn jetty:run' on the bridge module
+
+- Complete Javadoc for core module
+
+------------------------------------------------------------------------------
+
+1.0-beta6 (2010-09-26)
+
+- Exposed MX search response time in ControlPoint API
+
+- Switched default MX to 3 seconds
+
+- API change: Removed ActionInvocationValues and addValue() operations,
+              action arguments are always named and not ordered
+
+- Bug: Fixed NPE when service descriptor (but only device descriptor)
+       couldn't be retrieved
+
+- Bug: Fixed UDA name validation, improved compatibility with broken
+       devices (less errors, more warnings)
+
+- Better error message when service descriptor is empty
+
+- API change: Optional performance optimization in RegistryListener,
+              notifying users about half-baked device graphs early
+
+- Fixed build on Linux, plugin repository also required
+
+- Workbench: New plugin for WANIPConnection service, editing port mappings
+
+- Documented RegistryListener
+
+------------------------------------------------------------------------------
+
+1.0-beta5 (2010-09-07)
+
+- Workbench: Fixed NPE when ContentDirectory container has no children
+  and doesn't announce it
+
+- MediaRenderer: Switchable fullscreen video, no video display while
+  playing audio only
+
+- Compatibility: Workarounds for various bugs in Intel UPnP Tools
+
+- Compatibility: Shortened callback path in Namespace for broken
+  Roku Soundbridge (which cuts off after 100 chars) and simplified extension
+
+- Bug: Don't expose the virtual QueryStateVariableAction in
+  service descriptor
+
+- Bug: Fixed NPE when stream protocol can not be found
+
+- Removed unused Device.getFirstIcon() method
+
+- Simplified Resource representation/model
+
+- Improved overall extensibility, device graph metamodel immutability
+
+- Removed StreamUtil, migrated to teleal-commons IO
+
+- Added Server header to all GET responses
+
+------------------------------------------------------------------------------
+
+1.0-beta4 (2010-08-04)
+
+- Fixed XML output encoding issue (Pete Gould)
+
+- Fixed namespacing in XMLUtil printer
+
+- Made Apache httpstuff optional dependency
+
+- Accept messages without or with broken content-type header
+
+- Added support for automatic expiration/refresh of any resource in registry
+
+- Moved MockUpnpService into core main package
+
+- API change, namespace handling generalized and extensible
+
+- Fixed OOME and other Http header parsing bugs
+
+- Added missing server header to event subscription response
+
+- API change, ProtocolFactory throws exception when request can't be processed
+
+- Fixed unclear exception when a primitive action argument value was null
+
+- Improved base URL handling for local callback addresses
+
+- Cleaned up dependencies
+
+- API change, removed DeviceService class
+
+- More documentation and tests
+
+- Switched to LGPLv3
+
+------------------------------------------------------------------------------
+
+1.0-beta3 (2010-07-12)
+
+- Fixed Byte[] return type of action methods, now defaults and converts
+  correctly to bin.base64
+
+- Validation of valid XML strings
+
+- Finished Apache HTTP based transport implementation
+
+- XML subsystem compatibility with Android 2.1, Cling now runs on 2.1
+
+- Allow logging override by user on command-line for workbench
+
+- Fixed NPE in action execution with string-convertible types
+
+- Support for ephemeral ports on TCP stream servers
+
+- New registry access convenience methods
+
+- Documented logging configuration procedure
+
+------------------------------------------------------------------------------
+
+1.0-beta2 (2010-07-01)
+
+- Cleaned up device graph finders
+
+- Improved network SPI and header handling
+
+- First transport implementation based on Apache HttpComponents (for Android)
+
+- Performance optimization, avoid concurrent descriptor retrieval
+
+- Faster (on Android) unwrapped DOM parsing in binders for hydrating from XML
+
+- New SAX based parser, which is actually slower on Android than the DOM
+  parser
+
+- Easier extensible default configuration
+
+- Added Android configuration classes
+
+- Added Android manual chapter
+
+------------------------------------------------------------------------------

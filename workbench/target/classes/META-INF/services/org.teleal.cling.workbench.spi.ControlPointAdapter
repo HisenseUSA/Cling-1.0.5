@@ -1,0 +1,6 @@
+org.teleal.cling.workbench.plugins.binarylight.controlpoint.SwitchPowerControlPointAdapter
+org.teleal.cling.workbench.plugins.contentdirectory.ContentDirectoryControlPointAdapter
+org.teleal.cling.workbench.plugins.avtransport.AVTransportControlPointAdapter
+org.teleal.cling.workbench.plugins.renderingcontrol.RenderingControlPointAdapter
+org.teleal.cling.workbench.plugins.messagebox.MessageBoxControlPointAdapter
+org.teleal.cling.workbench.plugins.igd.WANIPConnectionControlPointAdapter

@@ -1,0 +1,33 @@
+### Cling - Java/Android UPnP library and tools
+
+Cling is a UPnP-compatible software stack for Java environments. The project's goals are strict specification compliance, complete, clean and extensive APIs, as well as rich SPIs for easy customization.
+
+See link: http://4thline.org/projects/cling/
+
+The current stable release of Cling is 1.0.5 (2011-09-22), see the Changelog for a summary of improvements and the Road Map for future plans.
+
+Read this chapter of the manual for a simple Cling usage example: http://4thline.org/projects/cling/core/manual/cling-core-manual.html#chapter.GettingStarted
+
+## Main modules of Cling are:
+
+# Cling Core
+
+    An embeddable Java library that implements the UPnP Device Architecture 1.0. Use Cling Core to expose services with a UPnP remoting interface, or to write control point applications that discover UPnP devices and utilize their services. You can also integrate Cling Core as an Android UPnP/DLNA library in your applications (platform level 7/2.1 required). The full source code of the Android UPnPBrowser example of the manual can be found here. You can see the application in action in this video.
+    
+# Cling Support
+
+    Optional classes and useful infrastructure for developing and controlling UPnP services with Cling Core; extensions that simplify working with UPnP media servers and renderers, NAT port mapping on routers, etc.
+    
+# Cling Workbench
+
+    A desktop application for browsing UPnP devices and interacting with their services, including an HTTP gateway and WAN/LAN bridge.
+    
+# Cling MediaRenderer
+
+    Standalone UPnP MediaRenderer, based on gstreamer.
+    
+## LICENSE
+
+Cling 1.x is Free Software, distributed under the terms of the GNU Lesser General Public License. 
+
+For bundling Cling in proprietary Android applications, read the static linking exception FAQ: http://4thline.org/projects/cling/faq.html#g3
