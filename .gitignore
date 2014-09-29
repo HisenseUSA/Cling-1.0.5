@@ -12,6 +12,7 @@
 bin/
 gen/
 build.xml
+target/
 
 # Local configuration file (sdk path, etc)
 project.properties

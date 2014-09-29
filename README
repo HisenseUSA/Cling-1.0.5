@@ -31,3 +31,16 @@ Read this chapter of the manual for a simple Cling usage example: http://4thline
 Cling 1.x is Free Software, distributed under the terms of the GNU Lesser General Public License. 
 
 For bundling Cling in proprietary Android applications, read the static linking exception FAQ: http://4thline.org/projects/cling/faq.html#g3
+
+## Building
+
+Since building this product is for Java experts, it is presumed you have successfully installed and configured Maven and Java.
+
+To test your configuration, navigate to the top level folder for cling and use the command:  mvn validate
+
+To build, navigate to the top level folder for cling and use the commands:  
+* mvn compile
+* mvn install
+* mvn package
+
+
