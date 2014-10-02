@@ -234,6 +234,9 @@ public class UDA10DeviceDescriptorBinderImpl implements DeviceDescriptorBinder {
             } else if (ELEMENT.X_DLNACAP.equals(deviceNodeChild) &&
                     Descriptor.Device.DLNA_PREFIX.equals(deviceNodeChild.getPrefix())) {
                 descriptor.dlnaCaps = DLNACaps.valueOf(XMLUtil.getTextContent(deviceNodeChild));
+            } else if (ELEMENT.uiServerInfo.equals(deviceNodeChild)  &&
+                    Descriptor.Device.RUI_PREFIX.equals(deviceNodeChild.getPrefix()) ) {
+                hydrateRuiServerInfo(descriptor, deviceNodeChild);
             }
         }
     }
@@ -336,6 +339,26 @@ public class UDA10DeviceDescriptorBinderImpl implements DeviceDescriptorBinder {
         }
 
     }
+
+
+    public void hydrateRuiServerInfo(MutableDevice descriptor, Node ruiServerNode) throws DescriptorBindingException {
+
+        NodeList ruiServerNodeChildren = ruiServerNode.getChildNodes();
+        for (int i = 0; i < ruiServerNodeChildren.getLength(); i++) {
+            Node ruiServerNodeChild = ruiServerNodeChildren.item(i);
+
+            if (ruiServerNodeChild.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+
+            if (ELEMENT.uiListURL.equals(ruiServerNodeChild) &&
+                    Descriptor.Device.RUI_PREFIX.equals(ruiServerNodeChild.getPrefix()) ) {
+                descriptor.ruiListURI.add(parseURI(XMLUtil.getTextContent(ruiServerNodeChild)));
+            }
+
+        }
+
+    }
+
 
     public String generate(Device deviceModel, ControlPointInfo info, Namespace namespace) throws DescriptorBindingException {
         try {
@@ -453,6 +476,16 @@ public class UDA10DeviceDescriptorBinderImpl implements DeviceDescriptorBinder {
                 descriptor, deviceElement, Descriptor.Device.DLNA_PREFIX + ":" + ELEMENT.X_DLNACAP,
                 deviceModelDetails.getDlnaCaps(), Descriptor.Device.DLNA_NAMESPACE_URI
         );
+        if (deviceModelDetails.getRuiListURI() != null) {
+            Element ruiListElement = appendNewElement(descriptor, deviceElement,
+                  Descriptor.Device.RUI_PREFIX + ":" + ELEMENT.uiServerInfo,
+                  null, Descriptor.Device.DLNA_NAMESPACE_URI);
+            for (URI uri : deviceModelDetails.getRuiListURI()) {
+                appendNewElementIfNotNull(
+                     descriptor, ruiListElement, Descriptor.Device.RUI_PREFIX + ":" + ELEMENT.uiListURL,
+                     uri, Descriptor.Device.DLNA_NAMESPACE_URI);
+            }
+        }
 
         generateIconList(namespace, deviceModel, descriptor, deviceElement);
         generateServiceList(namespace, deviceModel, descriptor, deviceElement);

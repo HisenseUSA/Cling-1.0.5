@@ -60,6 +60,7 @@ public class MutableDevice {
     public List<MutableService> services = new ArrayList();
     public List<MutableDevice> embeddedDevices = new ArrayList();
     public MutableDevice parentDevice;
+    public List<URI> ruiListURI = new ArrayList();
 
     public Device build(Device prototype) throws ValidationException {
         // Note how all embedded devices inherit the version and baseURL of the root!

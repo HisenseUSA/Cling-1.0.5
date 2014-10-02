@@ -30,7 +30,9 @@ public abstract class Descriptor {
 
         public static final String NAMESPACE_URI = "urn:schemas-upnp-org:device-1-0";
         public static final String DLNA_NAMESPACE_URI = "urn:schemas-dlna-org:device-1-0";
+        public static final String RUI_NAMESPACE_URI = "urn:schemas-rui-org:device-1-0";
         public static final String DLNA_PREFIX = "dlna";
+        public static final String RUI_PREFIX = "rui";
 
         public enum ELEMENT {
             root,
@@ -53,7 +55,8 @@ public abstract class Descriptor {
             serialNumber,
             iconList, icon, width, height, depth, url, mimetype,
             serviceList, service, serviceType, serviceId, SCPDURL, controlURL, eventSubURL,
-            deviceList;
+            deviceList,
+            uiServerInfo, uiListURL;
 
             public static ELEMENT valueOrNullOf(String s) {
                 try {

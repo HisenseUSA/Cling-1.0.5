@@ -43,4 +43,9 @@ To build, navigate to the top level folder for cling and use the commands:
 * mvn install
 * mvn package
 
+## Known issues
+
+The install and package phases have failures during the test portion of the Cling Workbench.
+This doesn't appear to impact Android development.
+
 
