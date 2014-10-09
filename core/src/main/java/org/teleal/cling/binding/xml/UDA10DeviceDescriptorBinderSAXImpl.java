@@ -231,7 +231,7 @@ public class UDA10DeviceDescriptorBinderSAXImpl extends UDA10DeviceDescriptorBin
                     String txtR = getCharacters();
                     try {
                         log.info(".endElement: uiServerInfo: " + txtR);
-                        getInstance().ruiListURI = parseURI(txtR);
+                        getInstance().ruiURI = parseURI(txtR);
                     } catch (InvalidValueException ex) {
                         log.info(".endElement: Invalid uiServerInfo value, ignoring value: " + txtR);
                     } catch (Exception ex) {

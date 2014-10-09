@@ -61,7 +61,7 @@ public class MutableDevice {
     public List<MutableService> services = new ArrayList();
     public List<MutableDevice> embeddedDevices = new ArrayList();
     public MutableDevice parentDevice;
-    public URI ruiListURI;
+    public URI ruiURI;
 
     private static Logger log = Logger.getLogger(MutableDevice.class.getName());
 
@@ -103,7 +103,7 @@ public class MutableDevice {
                 new ModelDetails(modelName, modelDescription, modelNumber, modelURI),
                 serialNumber, upc, presentationURI,
                 dlnaDocs.toArray(new DLNADoc[dlnaDocs.size()]), dlnaCaps,
-                ruiListURI
+                ruiURI
         );
     }
 

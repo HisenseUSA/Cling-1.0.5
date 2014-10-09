@@ -353,7 +353,7 @@ public class UDA10DeviceDescriptorBinderImpl implements DeviceDescriptorBinder {
             if (ELEMENT.uiListURL.equals(ruiServerNodeChild) &&
                     Descriptor.Device.RUI_PREFIX.equals(ruiServerNodeChild.getPrefix()) ) {
                 log.fine("hydrateRuiServerInfo text: " + XMLUtil.getTextContent(ruiServerNodeChild));
-                descriptor.ruiListURI = parseURI(XMLUtil.getTextContent(ruiServerNodeChild));
+                descriptor.ruiURI = parseURI(XMLUtil.getTextContent(ruiServerNodeChild));
             }
 
         }
@@ -477,13 +477,13 @@ public class UDA10DeviceDescriptorBinderImpl implements DeviceDescriptorBinder {
                 descriptor, deviceElement, Descriptor.Device.DLNA_PREFIX + ":" + ELEMENT.X_DLNACAP,
                 deviceModelDetails.getDlnaCaps(), Descriptor.Device.DLNA_NAMESPACE_URI
         );
-        if (deviceModelDetails.getRuiListURI() != null) {
+        if (deviceModelDetails.getRuiURI() != null) {
             Element ruiListElement = appendNewElement(descriptor, deviceElement,
                   Descriptor.Device.RUI_PREFIX + ":" + ELEMENT.uiServerInfo,
                   null, Descriptor.Device.DLNA_NAMESPACE_URI);
             appendNewElementIfNotNull(
                  descriptor, ruiListElement, Descriptor.Device.RUI_PREFIX + ":" + ELEMENT.uiListURL,
-                 deviceModelDetails.getRuiListURI(), Descriptor.Device.DLNA_NAMESPACE_URI);
+                 deviceModelDetails.getRuiURI(), Descriptor.Device.DLNA_NAMESPACE_URI);
         }
 
         generateIconList(namespace, deviceModel, descriptor, deviceElement);
