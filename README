@@ -17,15 +17,15 @@ Read this chapter of the manual for a simple Cling usage example: http://4thline
 # Cling Support
 
     Optional classes and useful infrastructure for developing and controlling UPnP services with Cling Core; extensions that simplify working with UPnP media servers and renderers, NAT port mapping on routers, etc.
-    
+
 # Cling Workbench
 
     A desktop application for browsing UPnP devices and interacting with their services, including an HTTP gateway and WAN/LAN bridge.
-    
+
 # Cling MediaRenderer
 
     Standalone UPnP MediaRenderer, based on gstreamer.
-    
+
 ## LICENSE
 
 Cling 1.x is Free Software, distributed under the terms of the GNU Lesser General Public License. 
@@ -39,13 +39,9 @@ Since building this product is for Java experts, it is presumed you have success
 To test your configuration, navigate to the top level folder for cling and use the command:  mvn validate
 
 To build, navigate to the top level folder for cling and use the commands:  
-* mvn compile
+* mvn clean compile
 * mvn install
 * mvn package
 
 ## Known issues
-
-The install and package phases have failures during the test portion of the Cling Workbench.
-This doesn't appear to impact Android development.
-
 
