@@ -217,15 +217,26 @@ public class UDA10DeviceDescriptorBinderSAXImpl extends UDA10DeviceDescriptorBin
                     getInstance().udn = UDN.valueOf(getCharacters());
                     break;
                 case X_DLNADOC:
-                    String txt = getCharacters();
+                    String txtD = getCharacters();
                     try {
-                        getInstance().dlnaDocs.add(DLNADoc.valueOf(txt));
+                        getInstance().dlnaDocs.add(DLNADoc.valueOf(txtD));
                     } catch (InvalidValueException ex) {
-                        log.info("Invalid X_DLNADOC value, ignoring value: " + txt);
+                        log.info("Invalid X_DLNADOC value, ignoring value: " + txtD);
                     }
                     break;
                 case X_DLNACAP:
                     getInstance().dlnaCaps = DLNACaps.valueOf(getCharacters());
+                    break;
+                case uiServerInfo:
+                    String txtR = getCharacters();
+                    try {
+                        log.info(".endElement: uiServerInfo: " + txtR);
+                        getInstance().ruiListURI = parseURI(txtR);
+                    } catch (InvalidValueException ex) {
+                        log.info(".endElement: Invalid uiServerInfo value, ignoring value: " + txtR);
+                    } catch (Exception ex) {
+                        log.info(".endElement: uiServerInfo, exception: " + ex.getMessage());
+                    }
                     break;
             }
         }

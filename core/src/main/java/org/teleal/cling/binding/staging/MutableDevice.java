@@ -34,6 +34,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author Christian Bauer
@@ -60,7 +61,9 @@ public class MutableDevice {
     public List<MutableService> services = new ArrayList();
     public List<MutableDevice> embeddedDevices = new ArrayList();
     public MutableDevice parentDevice;
-    public List<URI> ruiListURI = new ArrayList();
+    public URI ruiListURI;
+
+    private static Logger log = Logger.getLogger(MutableDevice.class.getName());
 
     public Device build(Device prototype) throws ValidationException {
         // Note how all embedded devices inherit the version and baseURL of the root!
@@ -98,7 +101,9 @@ public class MutableDevice {
                 friendlyName,
                 new ManufacturerDetails(manufacturer, manufacturerURI),
                 new ModelDetails(modelName, modelDescription, modelNumber, modelURI),
-                serialNumber, upc, presentationURI, dlnaDocs.toArray(new DLNADoc[dlnaDocs.size()]), dlnaCaps
+                serialNumber, upc, presentationURI,
+                dlnaDocs.toArray(new DLNADoc[dlnaDocs.size()]), dlnaCaps,
+                ruiListURI
         );
     }
 
